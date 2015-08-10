@@ -5,7 +5,7 @@
 -----------------------------------------------------------------------------------------
 
 local composer = require( "composer" )
-local ga = require( "utils.GoogleAnalytics.ga" )
+local GA = require( "utils.GoogleAnalytics.ga" )
 
 -- call the ui renderer tool
 local Splash = require( "views.Splash" )
@@ -31,7 +31,7 @@ function scene:create( event )
   -- Example: add display objects to "sceneGroup", add touch listeners, etc.
   local splashDisplay = Splash.create()
 
-  splashDisplay.slogan:addEventListener( "touch",
+  splashDisplay.background:addEventListener( "touch",
     function( event )
       if ( event.phase == "began" ) then
         splashDisplay.slogan:bounce()
@@ -55,7 +55,7 @@ function scene:show( event )
 
     -- send to ga
     -- change the "splash" to scene's name
-    ga.enterScene("splash")
+    GA.enterScene("splash")
 
     -- Called when the scene is now on screen.
     -- Insert code here to make the scene come alive.
