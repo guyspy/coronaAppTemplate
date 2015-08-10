@@ -5,8 +5,10 @@
 -----------------------------------------------------------------------------------------
 local M = {}
 
-M.screenW, M.screenH, M.halfW, M.halfH = display.contentWidth, display.contentHeight, display.contentWidth*0.5, display.contentHeight*0.5
-
+M.screenW = display.contentWidth
+M.screenH = display.contentHeight
+M.halfW = display.contentWidth*0.5
+M.halfH = display.contentHeight*0.5
 M.h1 = 25
 
 return M

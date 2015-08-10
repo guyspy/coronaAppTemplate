@@ -8,7 +8,7 @@ local composer = require( "composer" )
 local ga = require( "utils.GoogleAnalytics.ga" )
 
 -- call the ui renderer tool
-local Splash = require( "ui.Splash" )
+local Splash = require( "views.Splash" )
 
 -- create scene
 local scene = composer.newScene()

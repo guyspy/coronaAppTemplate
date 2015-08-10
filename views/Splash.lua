@@ -3,7 +3,7 @@
 -- A standard example for creating display objects
 --
 -----------------------------------------------------------------------------------------
-local styles = require( "ui.styles" )
+local styles = require( "styles" )
 
 local M = {}
 
@@ -57,6 +57,8 @@ M.create = function( )
       )
     end
   end
+
+
 
   return group
 end
