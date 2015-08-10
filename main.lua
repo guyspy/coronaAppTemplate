@@ -13,7 +13,7 @@ local ga = require( "utils.GoogleAnalytics.ga" )
 ga.init({ -- Only initialize once, not in every file
   isLive = true, -- REQUIRED
   testTrackingID = "UA-58649048-3", -- REQUIRED Tracking ID from Google
-  productionTrackingID = "UA-58649048-2",
+  productionTrackingID = "",
   debug = false, -- Recomended when starting
 })
 -- a global catcher for exceptions
