@@ -36,6 +36,7 @@ function scene:create( event )
       if ( event.phase == "began" ) then
         splashDisplay.slogan:bounce()
       end
+      return true
     end
   )
 

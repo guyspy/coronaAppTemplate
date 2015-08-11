@@ -16,32 +16,25 @@ M.create = function( )
   local group = display.newGroup( )
 
   -- create background shade
-  local background = display.newRect( styles.halfW, styles.halfH, styles.screenW, styles.screenH )
-  background:setFillColor( 1,1,1 )
-  -- insert into group at index 1
-  group:insert( 1, background )
-  -- an easy way to access child object from outside
-  group.background = group[1]
+  group.background = display.newRect( group, styles.halfW, styles.halfH, styles.screenW, styles.screenH )
+  group.background:setFillColor( 1,1,1 )
 
   -- create logo text
-  local slogan = display.newText({
+  group.slogan = display.newText({
+    parent = group,
     text = "Splash!!",
     fontSize = styles.h1,
     x = styles.halfW,
     y = styles.halfH
   })
-  slogan:setFillColor( 0,0,0 )
-  -- insert into group at index 2
-  group:insert( 2, slogan )
-  -- an easy way to access child object from outside
-  group.slogan = group[2]
+  group.slogan:setFillColor( 0,0,0 )
 
   -- -------------------------------------------------------------------------------
   -- instance methods goes here
   -- -------------------------------------------------------------------------------
   -- declare animation as an instance method
   local isAnimating = false
-  function slogan:bounce(  )
+  function group.slogan:bounce(  )
     if not isAnimating then
       isAnimating = true
       transition.from( self,
