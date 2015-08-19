@@ -3,7 +3,8 @@
 -- A standard example for creating display objects
 --
 -----------------------------------------------------------------------------------------
-local styles = require( "styles" )
+local Styles = require( "styles" )
+local AdaptiveDisplay = require( "utils.AdaptiveDisplay" )
 
 local M = {}
 
@@ -16,40 +17,30 @@ M.create = function( )
   local group = display.newGroup( )
 
   -- create background shade
-  group.background = display.newRect( group, styles.halfW, styles.halfH, styles.screenW, styles.screenH )
-  group.background:setFillColor( 1,1,1 )
-
-  -- create logo text
-  group.slogan = display.newText({
+  group.background = AdaptiveDisplay.newImageRect({
     parent = group,
-    text = "Splash!!",
-    fontSize = styles.h1,
-    x = styles.halfW,
-    y = styles.halfH
+    filename = "assets/background.png",
+    width = Styles.screenW,
+    height = Styles.screenH,
+    x = Styles.halfW,
+    y = Styles.halfH,
+  })  
+
+  -- -- create logo text
+  group.slogan = AdaptiveDisplay.newText({
+    parent = group,
+    text = "Slogan!!",
+    fontSize = Styles.h1,
+    x = Styles.halfW,
+    y = Styles.halfH
   })
   group.slogan:setFillColor( 0,0,0 )
+
 
   -- -------------------------------------------------------------------------------
   -- instance methods goes here
   -- -------------------------------------------------------------------------------
-  -- declare animation as an instance method
-  local isAnimating = false
-  function group.slogan:bounce(  )
-    if not isAnimating then
-      isAnimating = true
-      transition.from( self,
-        {
-          xScale=0.1,
-          yScale=0.1,
-          time=1000,
-          transition=easing.outElastic,
-          onComplete=function( )
-            isAnimating = false
-          end
-        }
-      )
-    end
-  end
+
 
 
 
