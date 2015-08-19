@@ -6,9 +6,10 @@
 
 local composer = require( "composer" )
 local GA = require( "utils.GoogleAnalytics.ga" )
+local socket = require("socket")
 
 -- call the ui renderer tool
-local Splash = require( "views.Splash" )
+local Slogan = require( "views.display.Slogan" )
 
 -- create scene
 local scene = composer.newScene()
@@ -21,6 +22,49 @@ local scene = composer.newScene()
 
 -- -------------------------------------------------------------------------------
 
+local function startApp(  )
+  timer.performWithDelay(
+      2000,
+      function()
+        composer.gotoScene( "views.home", "fade" )
+      end
+    )
+end
+
+------------------------------------------------------
+--   check internet and start app which need internet
+------------------------------------------------------
+local function hasInternet(  )
+  local netConn = socket.connect("google.com", 80)
+  if netConn == nil then
+    return false
+  end
+  netConn:close()
+  return true
+end
+
+local function startAppIfHasInternet(  )
+  if hasInternet() then
+    timer.performWithDelay(
+      2000,
+      function()
+        composer.gotoScene( "views.home", "fade" )
+      end
+    )
+  else
+    native.showAlert(
+      "無網路連線",
+      "無法連線至網際網路，請稍候再試",
+      {"OK"},
+      function ( event )
+        if event.action == "clicked" then
+          startAppIfHasInternet( )
+        end
+      end
+    )
+  end
+end
+
 
 -- "scene:create()"
 function scene:create( event )
@@ -29,18 +73,9 @@ function scene:create( event )
 
   -- Initialize the scene here.
   -- Example: add display objects to "sceneGroup", add touch listeners, etc.
-  local splashDisplay = Splash.create()
+  local sloganDisplay = Slogan.create()
 
-  splashDisplay.background:addEventListener( "touch",
-    function( event )
-      if ( event.phase == "began" ) then
-        splashDisplay.slogan:bounce()
-      end
-      return true
-    end
-  )
-
-  sceneGroup:insert( splashDisplay )
+  sceneGroup:insert( sloganDisplay )
 end
 
 
@@ -57,7 +92,7 @@ function scene:show( event )
     -- send to ga
     -- change the "splash" to scene's name
     GA.enterScene("splash")
-
+    startApp( )
     -- Called when the scene is now on screen.
     -- Insert code here to make the scene come alive.
     -- Example: start timers, begin animation, play audio, etc.
@@ -74,7 +109,7 @@ function scene:hide( event )
   if ( phase == "will" ) then
     -- Called when the scene is on screen (but is about to go off screen).
     -- Insert code here to "pause" the scene.
-    -- Example: stop timers, stop animation, stop audio, etc.
+
   elseif ( phase == "did" ) then
     -- Called immediately after scene goes off screen.
   end
