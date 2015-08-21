@@ -1,14 +1,15 @@
 -----------------------------------------------------------------------------------------
 --
--- splash.lua. This is also a basic template
+-- home.lua. This is also a basic template
 --
 -----------------------------------------------------------------------------------------
 
 local composer = require( "composer" )
 local GA = require( "utils.GoogleAnalytics.ga" )
+local socket = require("socket")
 
 -- call the ui renderer tool
-local Splash = require( "views.Splash" )
+local HomePage = require( "views.display.HomePage" )
 
 -- create scene
 local scene = composer.newScene()
@@ -29,20 +30,19 @@ function scene:create( event )
 
   -- Initialize the scene here.
   -- Example: add display objects to "sceneGroup", add touch listeners, etc.
-  local splashDisplay = Splash.create()
+  local homeDisplay = HomePage.create()
 
-  splashDisplay.background:addEventListener( "touch",
+  homeDisplay.background:addEventListener( "touch",
     function( event )
       if ( event.phase == "began" ) then
-        splashDisplay.slogan:bounce()
+        homeDisplay.homeTitle:bounce()
       end
       return true
     end
   )
 
-  sceneGroup:insert( splashDisplay )
+  sceneGroup:insert( homeDisplay )
 end
-
 
 -- "scene:show()"
 function scene:show( event )
@@ -56,8 +56,8 @@ function scene:show( event )
 
     -- send to ga
     -- change the "splash" to scene's name
-    GA.enterScene("splash")
-
+    GA.enterScene("HomePage")
+    
     -- Called when the scene is now on screen.
     -- Insert code here to make the scene come alive.
     -- Example: start timers, begin animation, play audio, etc.

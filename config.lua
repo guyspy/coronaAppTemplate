@@ -1,19 +1,20 @@
+local aspectRatio = display.pixelHeight / display.pixelWidth
+
 application =
 {
 
 	content =
 	{
-		width = 320,
-		height = 480, 
-		scale = "letterBox",
+		-- width = 320,
+		-- height = 480, 
+		scale = "adaptive",
 		fps = 30,
 		
-		--[[
 		imageSuffix =
 		{
-			    ["@2x"] = 2,
+			["@2x"] = 2,
 		},
-		--]]
+
 	},
 
 	--[[
